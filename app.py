@@ -8,7 +8,7 @@ bot = telebot.TeleBot(TOKEN)
 def start(message: telebot.types.Message):
     text = 'Чтобы начать работу введите команду боту в следующем формате:\n<имя валюты> \
 <в какую валюту перевести> \
-<количество переводимой валюты>\nУвидеть список всех доступных валют: /values'
+<количество переводимой валюты>\nУвидеть список всех доступных валют:\n/values'
     bot.reply_to(message, text)
 
 @bot.message_handler(commands=['values'])
@@ -24,7 +24,7 @@ def convert(message: telebot.types.Message):
         values = message.text.split(' ')
 
         if len(values) != 3:
-            raise ConvertionExeption('Слишком много параметров.')
+            raise ConvertionExeption('Введите команду по инструкции.')
         quote, base, amount = values
         total_base = Converter.convert(quote, base, amount)
     except ConvertionExeption as e:
